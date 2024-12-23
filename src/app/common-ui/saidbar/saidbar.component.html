@@ -1,0 +1,42 @@
+<img class="ml16 mb20" src="/assets/img/Logo-Tik-Talk.svg" alt="">
+
+<nav>
+    <ul class="main-menu-list">
+        <li *ngFor="let menuItem of menuItems">
+            <a class="menu-item" [routerLink]="[menuItem.link]">
+                <svg [icon]="menuItem.icon"></svg>
+                <span>{{menuItem.label}}</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<p class="medium-tex mb20">
+    Подписчики
+</p>
+
+
+@for (profile of subscripbers$ | async; track profile.id) {
+<app-subscibee-card [profile]="profile"></app-subscibee-card>
+}
+
+
+<div class="mt20 to-subscribers">
+    <a [routerLink]="'/login'" class="subscripbers-link medium-text">Все подписчики</a>
+    <svg icon="arrow" class="to-subscibers-icon"></svg>
+</div>
+
+
+<footer class="saidbar__footer">
+    @if (me(); as me) {
+    @if (me.avatarUrl) {
+    <img [src]="me.avatarUrl | imgUrl" alt="">
+    } @else {
+    <img src="assets/img/content-avater.png" alt="">
+    }
+    <div class="medium-text username-text">{{me.username}}</div>
+    <a [routerLink]="['settings']" class="settings-btn">
+        <svg icon="settings"></svg>
+    </a>
+    }
+</footer>
